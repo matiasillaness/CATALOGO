@@ -1,0 +1,39 @@
+version: "3.8"
+services:
+  catalogo-api:
+    container_name: catalogo-api
+    image: cristian113844/catalogo-g4:latest
+    build: .
+    ports:
+      - 8084:8080
+    depends_on:
+      - postgres_db
+    restart: always
+    environment:
+      - DATABASE_URL=jdbc:postgresql://postgres_db:5433/postgres
+      - DATABASE_USERNAME=postgres
+      - DATABASE_PASSWORD=postgres
+  postgres_db:
+    container_name: postgres_db
+    image: postgres:16.0-alpine
+    restart: always
+    ports:
+      - "5433:5432"
+    expose:
+      - 5433
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+      PGPORT: 5433
+
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    ports:
+      - "80:80"
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    depends_on:
+      - postgres_db

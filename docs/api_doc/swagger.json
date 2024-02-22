@@ -1,0 +1,1 @@
+{"openapi":"3.0.1","info":{"title":"'@project.name@'","description":"'@project.description@'","contact":{"name":"Joe Doe","email":"dumy@dumy"},"version":"'@project.version@'"},"servers":[{"url":"http://localhost:8080","description":"'@project.description@'"}],"paths":{},"components":{}}
